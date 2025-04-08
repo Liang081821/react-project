@@ -9,7 +9,7 @@ const router = createBrowserRouter([
 
   {
     path: "/test",
-    element: <div>Test</div>,
+    element: <div>Test if i success!</div>,
   },
 
   {
