@@ -31,7 +31,6 @@ jobs:
           Invoke-WebRequest -Uri https://get.pnpm.io/install.ps1 -OutFile install.ps1
           .\install.ps1
           $env:PATH += ";C:\Users\runneradmin\AppData\Local\pnpm"
-      - run: pnpm -v
 
       - run: pnpm install
       - run: pnpm run build
