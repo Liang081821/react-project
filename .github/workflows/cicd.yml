@@ -28,12 +28,11 @@ jobs:
        # 安裝 pnpm (Windows 上安裝方法)
       - uses: pnpm/action-setup@v4
         with:
-            version: 10
-            run_install: |
-              - recursive: true
-                args: [--frozen-lockfile, --strict-peer-dependencies]
-              - args: [--global, gulp, prettier, typescript]
-
+          version: 10
+          run_install: |
+            - recursive: true
+              args: [--frozen-lockfile, --strict-peer-dependencies]
+            - args: [--global, gulp, prettier, typescript]
       - run: pnpm install
       - run: pnpm run build
 
