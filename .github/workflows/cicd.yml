@@ -30,6 +30,7 @@ jobs:
         run: |
           Invoke-WebRequest -Uri https://get.pnpm.io/install.ps1 -OutFile install.ps1
           .\install.ps1
+          setx PATH "$env:PATH;C:\Users\runneradmin\AppData\Local\pnpm"
           $env:PATH += ";C:\Users\runneradmin\AppData\Local\pnpm"
 
       - run: pnpm install
