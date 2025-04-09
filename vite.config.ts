@@ -8,5 +8,20 @@ export default defineConfig({
     react(),
     // analyzer()
   ],
-  build: { sourcemap: true },
+  build: {
+    sourcemap: true,
+
+    // code-splitting 獨立打包第三方套件
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes("node_modules")) {
+            return "vendor";
+          }
+        },
+      },
+    },
+  },
 });
+
+// #TODO: analyzer 在部署的時候會影響，要註解掉
