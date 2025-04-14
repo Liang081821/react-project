@@ -2,12 +2,16 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import blogRoutes from "../src/routes/blogRoutes.js";
+import cors from "cors";
 
 // 讀取 .env 配置
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 5000;
+
+// 啟用 CORS
+app.use(cors());
 
 // 中介軟體，讓 Express 可以處理 JSON 格式的請求體
 app.use(express.json());
