@@ -1,38 +1,43 @@
-import mongoose from "mongoose";
-import Blog from "./models/Blog.js";
+import express from "express";
 import dotenv from "dotenv";
+import mongoose from "mongoose";
+import blogRoutes from "../src/routes/blogRoutes.js";
+
+// 讀取 .env 配置
 dotenv.config();
 
-const uri = `mongodb+srv://Liang:${process.env.MONGONDB_PASSWORD}@cluster0.f3b1gm7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+const app = express();
+const port = process.env.PORT || 5000;
 
-async function main() {
+// 中介軟體，讓 Express 可以處理 JSON 格式的請求體
+app.use(express.json());
+
+// 設定路由
+app.use("/api/blogs", blogRoutes); // 這是你的文章路由
+
+// Connect to MongoDB and start server
+async function startServer() {
   try {
-    // 先連線資料庫
-    await mongoose.connect(uri);
-    console.log("✅ MongoDB 已連線");
+    const dbUrl = process.env.DATABASE_URL;
 
-    // 建立一筆文章
-    const article = new Blog({
-      title: "Awesome Post!",
-      slug: "awesome-post",
-      published: true,
-      content: "This is the best post ever",
-      tags: ["featured", "announcement"],
+    // 檢查 DATABASE_URL 是否設定
+    if (!dbUrl) {
+      throw new Error(
+        "❌ DATABASE_URL 尚未設定。請在 .env 文件中設定 MongoDB 連接字串。"
+      );
+    }
+
+    // 連接 MongoDB
+    await mongoose.connect(dbUrl);
+    console.log("✅ 成功連線 MongoDB");
+
+    // 啟動伺服器
+    app.listen(port, () => {
+      console.log(`🚀 伺服器已啟動：http://localhost:${port}`);
     });
-
-    // 儲存文章
-    await article.save();
-    console.log("📝 文章已儲存");
-
-    // 查詢文章
-    const firstArticle = await Blog.findOne({});
-    console.log("📄 查詢結果：", firstArticle);
   } catch (err) {
-    console.error("❌ 發生錯誤：", err);
-  } finally {
-    // 結束連線（可以視情況保留）
-    await mongoose.disconnect();
+    console.error("❌ 伺服器啟動失敗：", err);
   }
 }
 
-main();
+startServer();

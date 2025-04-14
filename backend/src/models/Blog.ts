@@ -1,23 +1,20 @@
-import mongoose from "mongoose";
-const { Schema, model } = mongoose;
+import mongoose, { Schema, Document } from "mongoose";
 
-const blogSchema = new Schema({
-  title: String,
-  slug: String,
-  published: Boolean,
-  author: String,
-  content: String,
-  tags: [String],
-  createdAt: Date,
-  updatedAt: Date,
-  comments: [
-    {
-      user: String,
-      content: String,
-      votes: Number,
-    },
-  ],
+// 定義 Blog 資料結構
+interface IBlog extends Document {
+  title: string;
+  content: string;
+  author: string;
+}
+
+// 建立 Blog Schema
+const blogSchema = new Schema<IBlog>({
+  title: { type: String, required: true },
+  content: { type: String, required: true },
+  author: { type: String, required: true },
 });
 
-const Blog = model("Blog", blogSchema);
+// 創建 Blog model
+const Blog = mongoose.model<IBlog>("Blog", blogSchema);
+
 export default Blog;

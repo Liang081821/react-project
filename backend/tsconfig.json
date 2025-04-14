@@ -4,6 +4,7 @@
     "module": "NodeNext", // 如何處理模組
     "moduleResolution": "NodeNext",
     "esModuleInterop": true,
+
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
