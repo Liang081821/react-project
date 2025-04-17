@@ -50,9 +50,6 @@ const BlogForm = (props: BlogFormProp) => {
             placeholder="Enter author's name"
           />
         </div>
-        <div className="bg-primary">
-          This background should be your primary color (#B6B66A).
-        </div>
         <CustomButton title={"Create Blog"} type="submit"></CustomButton>
       </form>
     </>

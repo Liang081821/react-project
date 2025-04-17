@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { createBlog } from "../services/blogServices";
-import BlogForm from "./components/BlogForm";
-import useBlogStore from "../store/useBlogStore";
+import { createBlog } from "../../../services/blogServices";
+import BlogForm from "../../components/BlogForm";
+import useBlogStore from "../../../store/useBlogStore";
+import useAlertStore from "../../../store/useAlertStore";
 
 const Home = () => {
   // 用來儲存表單的狀態
@@ -11,6 +12,7 @@ const Home = () => {
 
   const blogs = useBlogStore((state) => state.blogs);
   const getBlogs = useBlogStore((state) => state.getBlogs);
+  const showAlert = useAlertStore((state) => state.showAlert);
 
   useEffect(() => {
     getBlogs();
@@ -34,7 +36,7 @@ const Home = () => {
         author,
       };
       const response = await createBlog(newBlog); // 呼叫 API
-      console.log("創建成功", response);
+      showAlert("success", "good");
 
       // 清空表單
       setTitle("");

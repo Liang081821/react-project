@@ -1,10 +1,4 @@
 @import "tailwindcss";
-/* @import "tailwindcss/preflight";
-@import "tailwindcss/utilities"; */
-/* @import "tailwindcss/screens"; */
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities; */
 @theme {
   --color-primary: #b6b66a;
   --color-light: #d3d3d3;

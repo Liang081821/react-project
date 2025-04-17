@@ -20,7 +20,6 @@ const CustomButton = (props: ButtonProps) => {
             backgroundColor: "var(--color-dark)",
           },
         }}
-        disableElevation
       >
         {title}
       </Button>
