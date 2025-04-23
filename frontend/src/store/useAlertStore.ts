@@ -20,13 +20,19 @@ const useAlertStore = create<AlertProps>((set) => ({
   message: "",
   variant: "outlined",
 
-  showAlert: (severity, message, variant) =>
+  showAlert: (severity, message, variant) => {
     set(() => ({
       severity,
       message,
       variant,
       isOpen: true,
     })),
+      setTimeout(() => {
+        set({
+          isOpen: false,
+        });
+      }, 3000);
+  },
 
   closeAlert: () =>
     set(() => ({

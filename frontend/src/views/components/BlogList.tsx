@@ -16,15 +16,21 @@ const BlogList = ({ blogs }: BlogListProps) => {
       }}
     >
       {blogs.length > 0 ? (
-        blogs.map((blog) => (
-          <Grid>
-            <BlogItem
-              title={blog.title}
-              content={blog.content}
-              author={blog.author}
-            ></BlogItem>
-          </Grid>
-        ))
+        [...blogs]
+          .sort(
+            (a, b) =>
+              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          )
+          .map((blog) => (
+            <Grid key={blog._id}>
+              <BlogItem
+                id={blog._id}
+                title={blog.title}
+                content={blog.content}
+                author={blog.author}
+              />
+            </Grid>
+          ))
       ) : (
         <p>No blogs available</p>
       )}

@@ -16,7 +16,7 @@ const CustomerAlert = ({ severity, message, variant }: AlertProps) => {
   const isOpen = useAlertStore((state) => state.isOpen);
 
   return (
-    <Collapse in={isOpen}>
+    <Collapse in={isOpen} timeout={1000}>
       <Alert
         severity={severity}
         variant={variant}
