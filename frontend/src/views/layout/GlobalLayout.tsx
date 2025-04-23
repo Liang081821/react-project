@@ -18,7 +18,7 @@ const GlobalLayout = () => {
           variant={variant}
         />
       )}
-      <main>
+      <main className="p-4">
         <Outlet />
       </main>
       <footer></footer>

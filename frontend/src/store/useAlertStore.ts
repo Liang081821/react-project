@@ -9,7 +9,7 @@ interface AlertProps {
   showAlert: (
     severity: AlertType,
     message: string,
-    variant: AlertVariantType
+    variant?: AlertVariantType
   ) => void;
   closeAlert: () => void;
 }
@@ -18,7 +18,7 @@ const useAlertStore = create<AlertProps>((set) => ({
   isOpen: false,
   severity: "info",
   message: "",
-  variant: "filled",
+  variant: "outlined",
 
   showAlert: (severity, message, variant) =>
     set(() => ({
@@ -31,9 +31,6 @@ const useAlertStore = create<AlertProps>((set) => ({
   closeAlert: () =>
     set(() => ({
       isOpen: false,
-      message: "",
-      severity: "info",
-      variant: "filled",
     })),
 }));
 export default useAlertStore;
