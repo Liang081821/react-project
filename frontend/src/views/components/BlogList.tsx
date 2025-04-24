@@ -9,10 +9,11 @@ const BlogList = ({ blogs }: BlogListProps) => {
   return (
     <Grid
       container
+      direction="column"
       spacing={2}
       sx={{
-        justifyContent: "center",
-        alignItems: "flex-start",
+        justifyContent: "flex-start",
+        alignItems: "center",
       }}
     >
       {blogs.length > 0 ? (

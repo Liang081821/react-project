@@ -2,7 +2,7 @@ import { Alert } from "@mui/material";
 import AlertTitle from "@mui/material/AlertTitle";
 import IconButton from "@mui/material/IconButton";
 import Collapse from "@mui/material/Collapse";
-import { IoIosClose } from "react-icons/io";
+// import { IoIosClose } from "react-icons/io";
 import { AlertType, AlertVariantType } from "../../types/alert";
 import useAlertStore from "../../store/useAlertStore";
 interface AlertProps {
@@ -29,7 +29,7 @@ const CustomerAlert = ({ severity, message, variant }: AlertProps) => {
               closeAlert();
             }}
           >
-            <IoIosClose fontSize="inherit" />
+            {/* <IoIosClose fontSize="inherit" /> */}
           </IconButton>
         }
         sx={{
