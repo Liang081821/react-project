@@ -4,10 +4,10 @@ import { Request, Response } from "express";
 // 創建新文章
 export const createBlog = async (req: Request, res: Response) => {
   try {
-    const { title, content, author } = req.body;
-    const newBlog = new Blog({ title, content, author });
-    const savedBlog = await newBlog.save(); // 儲存新文章
-    res.status(201).json(savedBlog); // 回傳創建的文章
+    const { title, content, author } = req.body; // 接收前端的請求
+    const newBlog = new Blog({ title, content, author }); // 準備好資料
+    const savedBlog = await newBlog.save(); // 儲存到資料庫
+    res.status(201).json(savedBlog); // 回傳文章
   } catch (err) {
     if (err instanceof Error) {
       res.status(500).json({ error: err.message });

@@ -8,11 +8,16 @@ interface IBlog extends Document {
 }
 
 // 建立 Blog Schema
-const blogSchema = new Schema<IBlog>({
-  title: { type: String, required: true },
-  content: { type: String, required: true },
-  author: { type: String, required: true },
-});
+const blogSchema = new Schema<IBlog>(
+  {
+    title: { type: String, required: true },
+    content: { type: String, required: true },
+    author: { type: String, required: true },
+  },
+  {
+    timestamps: true,
+  }
+);
 
 // 創建 Blog model
 const Blog = mongoose.model<IBlog>("Blog", blogSchema);
