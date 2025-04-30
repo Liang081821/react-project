@@ -1,13 +1,8 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
 import useDialogStore from "../../store/useDialogStore";
-import CustomButton from "./CustomButton";
+import { DialogTitle, IconButton } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 interface CustomDialogProps {
   content: React.ReactNode;
@@ -16,17 +11,22 @@ interface CustomDialogProps {
 export default function CustomDialog({ content }: CustomDialogProps) {
   const isOpen = useDialogStore((state) => state.isOpen);
   const closeDialog = useDialogStore((state) => state.closeDialog);
+
   return (
     <Dialog open={isOpen}>
-      {content}
-
-      <DialogActions>
-        <CustomButton
-          title="Cancel"
-          type="button"
+      <DialogTitle sx={{ position: "relative" }}>
+        <IconButton
+          sx={{
+            position: "absolute",
+            right: 8,
+            top: 8,
+          }}
           onClick={() => closeDialog()}
-        />
-      </DialogActions>
+        >
+          <CloseIcon />
+        </IconButton>
+      </DialogTitle>
+      {content}
     </Dialog>
   );
 }

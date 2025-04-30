@@ -7,7 +7,7 @@ import CryptoDetail from "../pages/Crypto/CryptoDetail";
 import { lazy } from "react";
 const Crypto = lazy(() => import("../pages/Crypto/Crypto"));
 const Stock = lazy(() => import("../pages/Stock/Stock"));
-const Home = lazy(() => import("../pages/Home/Home"));
+const Home = lazy(() => import("../pages/Blog/BlogPage"));
 
 import PathConstants from "./pathConstants";
 

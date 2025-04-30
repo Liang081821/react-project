@@ -1,6 +1,6 @@
 import BlogItem from "./BlogItem";
 import { Grid } from "@mui/material";
-import { BlogItem as IBlogItem } from "../../models/Blog";
+import { BlogItem as IBlogItem } from "../../../models/Blog";
 interface BlogListProps {
   blogs: IBlogItem[];
 }

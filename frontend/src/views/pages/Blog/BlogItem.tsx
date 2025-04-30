@@ -10,12 +10,12 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import MenuItem from "@mui/material/MenuItem";
-import useBlogStore from "../../store/useBlogStore";
+import useBlogStore from "../../../store/useBlogStore";
 import { Paper } from "@mui/material";
 import MenuList from "@mui/material/MenuList";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import { useState } from "react";
-import useAlertStore from "../../store/useAlertStore";
+import useAlertStore from "../../../store/useAlertStore";
 interface BlogItemProps {
   id: string;
   title: string;

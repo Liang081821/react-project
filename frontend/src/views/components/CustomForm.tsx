@@ -3,7 +3,6 @@ import {
   FormControl,
   Input,
   FormHelperText,
-  Button,
   Box,
   Typography,
 } from "@mui/material";
@@ -20,7 +19,6 @@ export default function CustomForm({ onSubmit, onClick }: CustomFormProps) {
   const {
     register,
     handleSubmit,
-    setValue,
     formState: { errors },
   } = useForm<BlogFormData>();
 

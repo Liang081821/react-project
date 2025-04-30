@@ -1,17 +1,9 @@
-import CustomForm from "./CustomForm";
+import CustomForm from "../../components/CustomForm";
 import { SubmitHandler } from "react-hook-form";
-import { BlogFormData } from "../../types/blogForm";
-
-type InputSetter = (value: string) => void;
+import { BlogFormData } from "../../../types/blogForm";
 
 interface BlogFormProp {
-  title: string;
-  content: string;
-  author: string;
   onSubmit: SubmitHandler<BlogFormData>;
-  setAuthor: InputSetter;
-  setContent: InputSetter;
-  setTitle: InputSetter;
 }
 
 const BlogForm = (props: BlogFormProp) => {

@@ -1,19 +1,15 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { createBlog } from "../../../services/blogServices";
-import BlogForm from "../../components/BlogForm";
 import useBlogStore from "../../../store/useBlogStore";
 import useAlertStore from "../../../store/useAlertStore";
-import BlogList from "../../components/BlogList";
-import CreateBlog from "./CreateBlog";
+import BlogList from "./BlogList";
+import BlogDialog from "./BlogDialog";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { BlogFormData } from "../../../types/blogForm";
 import useDialogStore from "../../../store/useDialogStore";
+import dayjs from "dayjs";
 
 const Home = () => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [author, setAuthor] = useState("");
-
   const blogs = useBlogStore((state) => state.blogs);
   const getBlogs = useBlogStore((state) => state.getBlogs);
   const showAlert = useAlertStore((state) => state.showAlert);
@@ -22,10 +18,8 @@ const Home = () => {
 
   useEffect(() => {
     getBlogs();
-    console.log(blogs);
   }, []);
 
-  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   //   e.preventDefault();
   //   if (!title || !content || !author) {
   //     showAlert("warning", "Please fill the blank and submit again!");
@@ -55,14 +49,14 @@ const Home = () => {
     // data 已經包含 title、content、author
     try {
       const newBlog = {
-        title: "你好",
+        title: dayjs().format("YYYY/MM/DD"),
         content: data.content,
-        author: "你好",
+        author: "Liang", // #TODO:未來擴充
       };
       await createBlog(newBlog);
       closeDialog();
       showAlert("success", "You have created a blog successfully!");
-      await getBlogs();
+      await getBlogs(); // 自動重新抓取
 
       reset();
     } catch (error) {
@@ -74,24 +68,7 @@ const Home = () => {
   return (
     <div>
       <div className="flex flex-col items-center">
-        <CreateBlog
-          onSubmit={onSubmit}
-          title={title}
-          content={content}
-          author={author}
-          setAuthor={setAuthor}
-          setContent={setContent}
-          setTitle={setTitle}
-        />
-        {/* <BlogForm
-          onSubmit={handleSubmit}
-          title={title}
-          content={content}
-          author={author}
-          setAuthor={setAuthor}
-          setContent={setContent}
-          setTitle={setTitle}
-        /> */}
+        <BlogDialog onSubmit={onSubmit} />
       </div>
 
       <BlogList blogs={blogs}></BlogList>

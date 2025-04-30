@@ -2,31 +2,15 @@ import { TextField } from "@mui/material";
 import { Box, Avatar } from "@mui/material";
 import CustomDialog from "../../components/CustomDialog";
 import useDialogStore from "../../../store/useDialogStore";
-import BlogForm from "../../components/BlogForm";
+import BlogForm from "./BlogForm";
 import { SubmitHandler } from "react-hook-form";
 import { BlogFormData } from "../../../types/blogForm";
 
-type InputSetter = (value: string) => void;
-
 interface CreateBlogProp {
-  title: string;
-  content: string;
-  author: string;
   onSubmit: SubmitHandler<BlogFormData>;
-  setAuthor: InputSetter;
-  setContent: InputSetter;
-  setTitle: InputSetter;
 }
 
-const CreateBlog = ({
-  title,
-  content,
-  author,
-  onSubmit,
-  setAuthor,
-  setContent,
-  setTitle,
-}: CreateBlogProp) => {
+const BlogDialog = ({ onSubmit }: CreateBlogProp) => {
   const showDialog = useDialogStore((state) => state.showDialog);
   return (
     <Box
@@ -60,20 +44,8 @@ const CreateBlog = ({
         placeholder="量，你在想什麼?"
       />
 
-      <CustomDialog
-        content={
-          <BlogForm
-            onSubmit={onSubmit}
-            title={title}
-            content={content}
-            author={author}
-            setAuthor={setAuthor}
-            setContent={setContent}
-            setTitle={setTitle}
-          />
-        }
-      />
+      <CustomDialog content={<BlogForm onSubmit={onSubmit} />} />
     </Box>
   );
 };
-export default CreateBlog;
+export default BlogDialog;
