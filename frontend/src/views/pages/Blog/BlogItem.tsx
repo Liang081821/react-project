@@ -16,6 +16,8 @@ import MenuList from "@mui/material/MenuList";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import { useState } from "react";
 import useAlertStore from "../../../store/useAlertStore";
+import useDialogStore from "../../../store/useDialogStore";
+import EditBlogForm from "./EditBlogForm";
 interface BlogItemProps {
   id: string;
   title: string;
@@ -29,6 +31,14 @@ const BlogItem = ({ id, title, author, content }: BlogItemProps) => {
   const deleteBlogs = useBlogStore((state) => state.deleteBlogs);
   const showAlert = useAlertStore((state) => state.showAlert);
   const getBlogs = useBlogStore((state) => state.getBlogs);
+  const dialog = useDialogStore((state) => state.dialog);
+
+  const showEditDialog = useDialogStore((state) => state.showEditDialog);
+  const isOpen = dialog === "edit";
+
+  const handleEditBlog = () => {
+    showEditDialog();
+  };
 
   const handleClose = () => {
     setOpen(false);
@@ -73,7 +83,8 @@ const BlogItem = ({ id, title, author, content }: BlogItemProps) => {
                         right: 0,
                       }}
                     >
-                      <MenuItem onClick={handleClose}>Edit</MenuItem>
+                      <MenuItem onClick={handleEditBlog}>Edit</MenuItem>
+                      {isOpen && <EditBlogForm></EditBlogForm>}
                       <MenuItem
                         onClick={() => handleDelete(id)}
                         sx={{ color: red[500] }}

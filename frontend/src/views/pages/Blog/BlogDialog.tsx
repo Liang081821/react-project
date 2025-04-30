@@ -11,7 +11,7 @@ interface CreateBlogProp {
 }
 
 const BlogDialog = ({ onSubmit }: CreateBlogProp) => {
-  const showDialog = useDialogStore((state) => state.showDialog);
+  const showDialog = useDialogStore((state) => state.showCreateDialog);
   return (
     <Box
       sx={{

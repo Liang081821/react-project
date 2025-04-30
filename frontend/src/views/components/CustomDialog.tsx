@@ -9,11 +9,12 @@ interface CustomDialogProps {
 }
 
 export default function CustomDialog({ content }: CustomDialogProps) {
-  const isOpen = useDialogStore((state) => state.isOpen);
+  const dialog = useDialogStore((state) => state.dialog);
+  const isCreatePostDialogOpen = dialog === "create";
   const closeDialog = useDialogStore((state) => state.closeDialog);
 
   return (
-    <Dialog open={isOpen}>
+    <Dialog open={isCreatePostDialogOpen}>
       <DialogTitle sx={{ position: "relative" }}>
         <IconButton
           sx={{

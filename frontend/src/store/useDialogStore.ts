@@ -1,23 +1,30 @@
 import { create } from "zustand";
 
+type DialogType = null | "create" | "edit";
+
 interface DialogProps {
-  isOpen: boolean;
-  showDialog: () => void;
+  dialog: DialogType; // 取代 isOpen >> 可以管理更多 dialog
+  showCreateDialog: () => void;
+  showEditDialog: () => void;
   closeDialog: () => void;
 }
 
 const useDialogStore = create<DialogProps>((set) => ({
-  isOpen: false,
+  dialog: null,
 
-  showDialog: () => {
+  showCreateDialog: () => {
     set(() => ({
-      isOpen: true,
+      dialog: "create",
     }));
   },
-
+  showEditDialog: () => {
+    set(() => ({
+      dialog: "edit",
+    }));
+  },
   closeDialog: () =>
     set(() => ({
-      isOpen: false,
+      dialog: null,
     })),
 }));
 export default useDialogStore;
