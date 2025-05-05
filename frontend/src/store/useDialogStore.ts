@@ -1,30 +1,32 @@
 import { create } from "zustand";
 
-type DialogType = null | "create" | "edit";
+// 定義對話框的類型
+type DialogType = "create" | "edit" | null; // 管理不同的 dialog >> 如果有多個 dialog，要不就是要提供 id，否則就是在區域管理 isOpen
 
 interface DialogProps {
-  dialog: DialogType; // 取代 isOpen >> 可以管理更多 dialog
-  showCreateDialog: () => void;
-  showEditDialog: () => void;
+  isOpen: boolean;
+  dialogType: DialogType;
+  showDialog: (type: DialogType) => void;
   closeDialog: () => void;
 }
 
 const useDialogStore = create<DialogProps>((set) => ({
-  dialog: null,
+  isOpen: false,
+  dialogType: null,
 
-  showCreateDialog: () => {
+  showDialog: (type: DialogType) => {
     set(() => ({
-      dialog: "create",
+      isOpen: true,
+      dialogType: type,
     }));
   },
-  showEditDialog: () => {
-    set(() => ({
-      dialog: "edit",
-    }));
-  },
+
+  // 關閉對話框
   closeDialog: () =>
     set(() => ({
-      dialog: null,
+      isOpen: false,
+      dialogType: null,
     })),
 }));
+
 export default useDialogStore;

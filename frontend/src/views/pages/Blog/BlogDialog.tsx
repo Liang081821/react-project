@@ -11,7 +11,8 @@ interface CreateBlogProp {
 }
 
 const BlogDialog = ({ onSubmit }: CreateBlogProp) => {
-  const showDialog = useDialogStore((state) => state.showCreateDialog);
+  const showDialog = useDialogStore((state) => state.showDialog);
+  const { dialogType } = useDialogStore(); // 這種取值方法會把 store 中所有東西訂閱下來再解構
   return (
     <Box
       sx={{
@@ -25,7 +26,7 @@ const BlogDialog = ({ onSubmit }: CreateBlogProp) => {
     >
       <Avatar></Avatar>
       <TextField
-        onClick={() => showDialog()}
+        onClick={() => showDialog("create")}
         sx={{
           borderRadius: "100px",
           backgroundColor: "#f5f5f5",
@@ -44,7 +45,12 @@ const BlogDialog = ({ onSubmit }: CreateBlogProp) => {
         placeholder="量，你在想什麼?"
       />
 
-      <CustomDialog content={<BlogForm onSubmit={onSubmit} />} />
+      {dialogType === "create" && (
+        <CustomDialog
+          title="建立貼文"
+          content={<BlogForm onSubmit={onSubmit} />}
+        />
+      )}
     </Box>
   );
 };

@@ -6,23 +6,28 @@ import CloseIcon from "@mui/icons-material/Close";
 
 interface CustomDialogProps {
   content: React.ReactNode;
+  title: string;
 }
 
-export default function CustomDialog({ content }: CustomDialogProps) {
-  const dialog = useDialogStore((state) => state.dialog);
-  const isCreatePostDialogOpen = dialog === "create";
+export default function CustomDialog({ content, title }: CustomDialogProps) {
+  const isOpen = useDialogStore((state) => state.isOpen); // 這種取值的方法只會訂閱單一個狀態，重新渲染訂閱的狀態
   const closeDialog = useDialogStore((state) => state.closeDialog);
 
   return (
-    <Dialog open={isCreatePostDialogOpen}>
+    <Dialog open={isOpen}>
       <DialogTitle sx={{ position: "relative" }}>
+        {title}
         <IconButton
           sx={{
             position: "absolute",
             right: 8,
             top: 8,
           }}
-          onClick={() => closeDialog()}
+          onClick={() => {
+            closeDialog();
+            console.log("Click close");
+            console.log(isOpen);
+          }}
         >
           <CloseIcon />
         </IconButton>
