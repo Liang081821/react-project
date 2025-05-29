@@ -46,10 +46,7 @@ const BlogDialog = ({ onSubmit }: CreateBlogProp) => {
       />
 
       {dialogType === "create" && (
-        <CustomDialog
-          title="建立貼文"
-          content={<BlogForm onSubmit={onSubmit} />}
-        />
+        <CustomDialog content={<BlogForm onSubmit={onSubmit} />} />
       )}
     </Box>
   );

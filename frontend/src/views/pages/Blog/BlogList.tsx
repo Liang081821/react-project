@@ -3,12 +3,16 @@ import { Grid } from "@mui/material";
 import { BlogItem as IBlogItem } from "../../../models/Blog";
 import EditBlogForm from "./EditBlogForm";
 import useDialogStore from "../../../store/useDialogStore";
+import { useState } from "react";
+
 interface BlogListProps {
   blogs: IBlogItem[];
 }
 
 const BlogList = ({ blogs }: BlogListProps) => {
   const { dialogType } = useDialogStore();
+  const [selectedBlog, setSelectedBlog] = useState<IBlogItem | null>(null);
+
   return (
     <>
       <Grid
@@ -29,19 +33,14 @@ const BlogList = ({ blogs }: BlogListProps) => {
             )
             .map((blog) => (
               <Grid key={blog._id}>
-                <BlogItem
-                  id={blog._id}
-                  title={blog.title}
-                  content={blog.content}
-                  author={blog.author}
-                />
+                <BlogItem blog={blog} setSelectedBlog={setSelectedBlog} />
               </Grid>
             ))
         ) : (
           <p>No blogs available</p>
         )}
       </Grid>
-      {dialogType === "edit" && <EditBlogForm />}
+      {dialogType === "edit" && <EditBlogForm selectedBlog={selectedBlog} />}
     </>
   );
 };

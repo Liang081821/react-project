@@ -16,8 +16,8 @@ router.post("/", createBlog);
 // 查詢所有文章
 router.get("/", getBlogs);
 
-// // 更新指定文章
-// router.put("/:id", updateBlog);
+// 更新指定文章(patch 室友更改的欄位才改)
+router.patch("/:id", updateBlog);
 
 // 刪除指定文章
 router.delete("/:id", deleteBlog);

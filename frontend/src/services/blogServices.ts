@@ -1,4 +1,5 @@
 import axios from "axios";
+import { BlogFormData } from "../types/blogForm.ts";
 
 const API_URL = "http://localhost:5000/api/blogs";
 
@@ -20,4 +21,9 @@ export const createBlog = async (data: {
 export const deleteBlog = async (id: string) => {
   const response = await axios.delete(`${API_URL}/${id}`);
   return response;
+};
+
+export const updateBlogs = async (id: string, data: BlogFormData) => {
+  const res = await axios.patch(`${API_URL}/${id}`, data);
+  return res.data;
 };

@@ -8,19 +8,31 @@ import {
 } from "@mui/material";
 import { BlogFormData } from "../../types/blogForm";
 import CustomButton from "./CustomButton";
+import { BlogItem } from "../../models/Blog";
 
 interface CustomFormProps {
   // onSubmit: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
   onSubmit: SubmitHandler<BlogFormData>;
+  title: string;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  defaultValues?: BlogItem | null;
 }
 
-export default function CustomForm({ onSubmit, onClick }: CustomFormProps) {
+export default function CustomForm({
+  onSubmit,
+  title,
+  onClick,
+  defaultValues,
+}: CustomFormProps) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<BlogFormData>();
+  } = useForm<BlogFormData>({
+    defaultValues: {
+      content: defaultValues?.content,
+    },
+  });
 
   return (
     <Box
@@ -37,8 +49,14 @@ export default function CustomForm({ onSubmit, onClick }: CustomFormProps) {
         gap: 2,
       }}
     >
+      {/* Hidden ID input */}
+      <Input
+        type="hidden"
+        {...register("id")}
+        defaultValue={defaultValues?._id} // 修改文章的時候才可以
+      />
       <Typography variant="h5" align="center" gutterBottom>
-        建立貼文
+        {title}
       </Typography>
 
       <FormControl error={!!errors.content} variant="standard">

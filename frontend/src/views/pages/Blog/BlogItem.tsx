@@ -17,15 +17,14 @@ import ClickAwayListener from "@mui/material/ClickAwayListener";
 import { useState } from "react";
 import useAlertStore from "../../../store/useAlertStore";
 import useDialogStore from "../../../store/useDialogStore";
+import { BlogItem as IBlogItem } from "../../../models/Blog";
 interface BlogItemProps {
-  id: string;
-  title: string;
-  author: string;
-  content: string;
-  createTime?: string;
+  blog: IBlogItem;
+  setSelectedBlog: (blog: IBlogItem) => void;
 }
 
-const BlogItem = ({ id, title, author, content }: BlogItemProps) => {
+const BlogItem = ({ blog, setSelectedBlog }: BlogItemProps) => {
+  const { title, author, content } = blog;
   const [open, setOpen] = useState<boolean>(false);
   const deleteBlogs = useBlogStore((state) => state.deleteBlogs);
   const showAlert = useAlertStore((state) => state.showAlert);
@@ -35,6 +34,7 @@ const BlogItem = ({ id, title, author, content }: BlogItemProps) => {
   const handleEditBlog = () => {
     showDialog("edit"); // 顯示 edit 的 dialog
     setOpen(false);
+    setSelectedBlog(blog);
   };
 
   const handleClose = () => {
@@ -55,7 +55,6 @@ const BlogItem = ({ id, title, author, content }: BlogItemProps) => {
   return (
     <>
       <Card sx={{ width: 345 }}>
-        {/* <EditBlogForm /> */}
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -84,7 +83,7 @@ const BlogItem = ({ id, title, author, content }: BlogItemProps) => {
                       <MenuItem onClick={handleEditBlog}>Edit</MenuItem>
 
                       <MenuItem
-                        onClick={() => handleDelete(id)}
+                        onClick={() => handleDelete(blog._id)}
                         sx={{ color: red[500] }}
                       >
                         Delete

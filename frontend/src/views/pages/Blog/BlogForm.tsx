@@ -11,7 +11,7 @@ const BlogForm = (props: BlogFormProp) => {
 
   return (
     <>
-      <CustomForm onSubmit={onSubmit}></CustomForm>
+      <CustomForm onSubmit={onSubmit} title="建立貼文"></CustomForm>
     </>
   );
 };

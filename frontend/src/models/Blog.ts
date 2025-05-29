@@ -1,3 +1,5 @@
+// 從後端回傳的資料
+
 export interface BlogItem {
   _id: string;
   title: string;
