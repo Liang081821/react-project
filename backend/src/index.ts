@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import blogRoutes from "../src/routes/blogRoutes.js";
+import authRoutes from "../src/routes/authRoutes.ts";
 import cors from "cors";
 
 // 讀取 .env 配置
@@ -17,7 +18,8 @@ app.use(cors());
 app.use(express.json());
 
 // 設定路由
-app.use("/api/blogs", blogRoutes); // 這是你的文章路由
+app.use("/api/blogs", blogRoutes);
+app.use("/api/auth", authRoutes);
 
 // Connect to MongoDB and start server
 async function startServer() {

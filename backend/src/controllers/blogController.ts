@@ -28,7 +28,7 @@ export const getBlogs = async (req: Request, res: Response) => {
 };
 
 // 更新指定文章
-export const updateBlog = async (req: Request, res: Response) => {
+export const updateBlog = async (req: Request, res: Response): Promise<any> => {
   try {
     const { title, content, author } = req.body;
     const updatedBlog = await Blog.findByIdAndUpdate(
@@ -48,7 +48,7 @@ export const updateBlog = async (req: Request, res: Response) => {
 };
 
 // 刪除指定文章
-export const deleteBlog = async (req: Request, res: Response) => {
+export const deleteBlog = async (req: Request, res: Response): Promise<any> => {
   try {
     const deletedBlog = await Blog.findByIdAndDelete(req.params.id); // 刪除文章
     if (!deletedBlog) {

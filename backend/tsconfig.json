@@ -8,7 +8,10 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
+
+    "noEmit": true,
+    "allowImportingTsExtensions": true
   },
   "ts-node": {
     // Tell ts-node CLI to install the --loader automatically
