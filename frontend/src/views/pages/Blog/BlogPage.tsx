@@ -58,7 +58,7 @@ const Home = () => {
       showAlert("success", "You have created a blog successfully!");
       await getBlogs(); // 自動重新抓取
 
-      reset();
+      reset(); // 這裡其實也沒用
     } catch (error) {
       console.error("創建失敗", error);
       showAlert("error", "Some error occurs, please try again.");

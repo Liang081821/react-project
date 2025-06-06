@@ -1,6 +1,6 @@
 import { Outlet } from "react-router";
 
-const CryptoLayout = () => {
+const LoginLayout = () => {
   return (
     <div>
       <Outlet />
@@ -8,4 +8,4 @@ const CryptoLayout = () => {
   );
 };
 
-export default CryptoLayout;
+export default LoginLayout;

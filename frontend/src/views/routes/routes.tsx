@@ -1,11 +1,12 @@
 import { createBrowserRouter } from "react-router";
 import GlobalLayout from "../layout/GlobalLayout";
-import CryptoLayout from "../layout/CryptoLayout";
-import CryptoDetail from "../pages/Crypto/CryptoDetail";
+import LoginLayout from "../layout/LoginLayout";
+import LoginDetail from "../pages/Auth/LoginDetail";
 
 // dynamic import 會自動拆分 bundle >> 有好有壞須自行評估
 import { lazy } from "react";
-const Crypto = lazy(() => import("../pages/Crypto/Crypto"));
+const Register = lazy(() => import("../pages/Auth/RegisterPage"));
+const Login = lazy(() => import("../pages/Auth/LoginPage"));
 const Stock = lazy(() => import("../pages/Stock/Stock"));
 const Home = lazy(() => import("../pages/Blog/BlogPage"));
 
@@ -15,26 +16,43 @@ import PathConstants from "./pathConstants";
 const router = createBrowserRouter([
   {
     path: PathConstants.HOME,
-    element: <GlobalLayout />,
     children: [
       {
-        index: true,
-        element: <Home />,
-      },
-      {
-        path: PathConstants.CRYPTO,
-        element: <CryptoLayout />,
+        path: PathConstants.HOME,
+        element: <GlobalLayout />,
         children: [
           {
             index: true,
-            element: <Crypto />,
+            element: <Home />,
           },
-          { path: PathConstants.CRYPTO_DETAIL, element: <CryptoDetail /> },
+
+          {
+            path: PathConstants.STOCK,
+            element: <Stock />,
+          },
         ],
       },
       {
-        path: PathConstants.STOCK,
-        element: <Stock />,
+        path: PathConstants.REGISTER,
+        element: <LoginLayout />,
+        children: [
+          {
+            index: true,
+            element: <Register />,
+          },
+          { path: PathConstants.LOGIN_DETAIL, element: <LoginDetail /> },
+        ],
+      },
+      {
+        path: PathConstants.LOGIN,
+        element: <LoginLayout />,
+        children: [
+          {
+            index: true,
+            element: <Login />,
+          },
+          { path: PathConstants.LOGIN_DETAIL, element: <LoginDetail /> },
+        ],
       },
     ],
   },

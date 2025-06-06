@@ -1,7 +1,8 @@
 const PathConstants = {
   HOME: "/",
-  CRYPTO: "crypto",
-  CRYPTO_DETAIL: "detail",
+  REGISTER: "register",
+  LOGIN: "login",
+  LOGIN_DETAIL: "detail",
   STOCK: "stock",
 } as const;
 
